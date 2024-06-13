@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 #include <iostream>
-#define HashSize 50000000
+#define HashSize 5000000003
 //#define HashSize ((1<<25)-1)
 #define CandidateSize 1024
 #define null 0
@@ -69,9 +69,9 @@ unsigned long long HashSearchUpdate(unsigned long addr, unsigned long long cyc) 
   unsigned long hshKey;
   HashEntry *entry;
   unsigned long long oldCyc;
-  //  hshKey = addr % HashSize;
+  hshKey = (addr >> 6) % HashSize;
   //cout<<3<<endl;
-  hshKey = addr;// & HashSize;
+  // hshKey = addr;// & HashSize;
   //cout<<0<<endl;
   entry = Hash[hshKey];
   //cout<<1<<endl;

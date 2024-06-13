@@ -22,6 +22,7 @@
 #include<fstream>
 
 #include "hash.cxx"
+#define BUF_NUM 1
 using namespace std;
 typedef struct tree_node Tree;
 struct tree_node {
@@ -83,27 +84,33 @@ int _DataAccess(unsigned long addr) {
 void PrintSize(){
   printf("hash allocated %u,  hash table size %u; scaletree size %u.\n",Hashallocated, numData,sizeTrace);
 }
-
-int main(){
+int main(int argc, char *argv[]) {
 	HashInitialize();
 	CounterInitialize();
-	std::ifstream in("/home/zhiwei2/last/data.txt");
-	std::string filename;
-	std::string line;
+  if (argc < 2) {
+    perror("wrong argument number");
+    return 1;
+  }
 
-  if (in) 
-  {
-      while (getline(in, line)) 
-      {
-      //    cout << line << endl;
-          _DataAccess(stoi(line));
-      }
+  FILE *fp = fopen(argv[1], "rb");
+  if (!fp) {
+    perror("Can't open");
+    return 1;
   }
-  else 
-  {
-      cout << "no such file" << endl;
+  unsigned long buf[BUF_NUM];
+  int n;
+  long long counter = 0;
+  while((n=fread(buf, sizeof(long long), BUF_NUM, fp))>0) {
+    for (int i = 0; i < n; i++) {
+          _DataAccess(buf[i]);
+    }
+    counter++;
+    if (counter % 1000 = 0) {
+      printf("%lld\n", counter);
+    }
   }
-  //PrintSize();
-  _PrintResults("./result_whole.txt");
+  fclose(fp);
+
+  _PrintResults((argc > 2)? argv[2] :"./result_whole.txt");
   return 0;
 }

@@ -1,8 +1,13 @@
-analyze:analyze.o
-	g++ analyze.o -o analyze
-analyze.o:analyze.S
-	g++ -c analyze.S -o analyze.o
-analyze.S:analyze.i
-	g++ -S analyze.i -o analyze.S
-analyze.i:analyze.c
-	g++ -E analyze.c -o analyze.i
+mode := Release
+ifeq ($(mode),Debug)
+CXXFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer -O0 -g
+else
+CXXFLAGS = -O3
+endif
+
+analyze: analyze.c scaleTree.c counter.cxx hash.cxx
+	g++ $(CXXFLAGS) analyze.c -o analyze
+clean:
+	rm analyze
+
+.PHONY: clean

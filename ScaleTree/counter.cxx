@@ -89,18 +89,18 @@ void RecordDistance(unsigned dis, unsigned long addr) {
       t++;
       td = td>>1;
     }
-    if(dis==1){
-      Addr_1[counters[t]] = addr;
-    }
-    else if(dis<=3){
-      Addr_3[counters[t]] = addr;
-    }
-    else if(dis<=7){
-      Addr_7[counters[t]] = addr;
-    }
-    else if(dis<=15){
-      Addr_15[counters[t]] = addr;
-    }
+    // if(dis==1){
+    //   Addr_1[counters[t]] = addr;
+    // }
+    // else if(dis<=3){
+    //   Addr_3[counters[t]] = addr;
+    // }
+    // else if(dis<=7){
+    //   Addr_7[counters[t]] = addr;
+    // }
+    // else if(dis<=15){
+    //   Addr_15[counters[t]] = addr;
+    // }
     counters[t]++;
    }
   }
@@ -129,10 +129,10 @@ int _PrintResults(const char *fileName) {
 	    sizes[i]-1, counters[i]);
 
   fprintf(histFile," End tree size is %u \n", sizeTrace);
-  _PrintResults_1("./result_1.txt");
-  _PrintResults_3("./result_3.txt");
-  _PrintResults_7("./result_7.txt");
-  _PrintResults_15("./result_15.txt");
+  // _PrintResults_1("./result_1.txt");
+  // _PrintResults_3("./result_3.txt");
+  // _PrintResults_7("./result_7.txt");
+  // _PrintResults_15("./result_15.txt");
   // fprintf(histFile,"\n\n Top 20 reuse distance smallest \n");
   // for(int i = 0; i<CacheBlockNum; i++)
   // {
