@@ -9,5 +9,7 @@ analyze: analyze.c scaleTree.c counter.cxx hash.cxx
 	g++ $(CXXFLAGS) analyze.c -o analyze
 clean:
 	rm analyze
+test: analyze bats.sh
+	bats bats.sh
 
-.PHONY: clean
+.PHONY: clean test
