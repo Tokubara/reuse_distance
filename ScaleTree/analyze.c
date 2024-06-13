@@ -105,12 +105,12 @@ int main(int argc, char *argv[]) {
           _DataAccess(buf[i]);
     }
     counter++;
-    if (counter % 1000 = 0) {
-      printf("%lld\n", counter);
+    if (counter % 100000000 == 0) {
+      printf("count=%lld\n", counter);
     }
   }
   fclose(fp);
 
-  _PrintResults((argc > 2)? argv[2] :"./result_whole.txt");
+  _PrintResults((argc > 2)? argv[2] : nullptr);
   return 0;
 }

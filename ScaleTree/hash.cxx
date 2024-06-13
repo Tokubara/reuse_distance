@@ -1,7 +1,8 @@
-
 #include <stdlib.h>
+#include <string.h>
 #include <iostream>
-#define HashSize 5000000003
+#include <assert.h>
+#define HashSize 2147483647
 //#define HashSize ((1<<25)-1)
 #define CandidateSize 1024
 #define null 0
@@ -30,7 +31,10 @@ int HashInitialize() {
   allocateCandidate();
   Hash=(HashEntry**)malloc(sizeof(HashEntry*)*HashSize);
 
-  for (i=0; i<HashSize; i++) Hash[i]=null;
+  // for (i=0; i<HashSize; i++) Hash[i]=null;
+  // printf("sizeof(Hash): %ld, HashSize*8: %ld\n", sizeof(Hash), (long signed)HashSize<<3);
+  // assert(sizeof(Hash)==(long signed)HashSize<<3);
+  memset(Hash, 0, sizeof(HashEntry*)*HashSize);
   return 0;
 }
 
